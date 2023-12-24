@@ -1,11 +1,14 @@
-import { useTicker } from "@/hooks";
-import { Button, HStack } from "@chakra-ui/react";
 import usePortfolios from "@/context";
 import { PortfoliosActionType } from "@/context/actions";
+import { useTicker } from "@/hooks";
+import { Button, HStack } from "@chakra-ui/react";
 
 export const ActionButtonGroups = () => {
   const { refetch } = useTicker();
-  const { dispatch } = usePortfolios();
+  const {
+    state: { portfolios },
+    dispatch,
+  } = usePortfolios();
 
   return (
     <HStack>
@@ -18,7 +21,7 @@ export const ActionButtonGroups = () => {
           })
         }
       >
-        Add Stock
+        {portfolios?.length ? "Add / Update" : "Add Stock"}
       </Button>
       <Button colorScheme="blue" onClick={() => refetch()}>
         Refresh

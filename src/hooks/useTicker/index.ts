@@ -1,3 +1,5 @@
+import { IPortfolio } from "@/interfaces";
+import { PortfolioDTO } from "@/utils";
 import { useQuery } from "@tanstack/react-query";
 
 const fetchTicker = async () => {
@@ -17,6 +19,12 @@ const useTicker = () => {
     queryFn: () => fetchTicker(),
     refetchInterval: CACHE_TIME,
     staleTime: CACHE_TIME,
+    select: (data) =>
+      data
+        ?.slice(0, 100)
+        ?.map((stockEntity: IPortfolio) =>
+          PortfolioDTO.fromStockEntity(stockEntity)
+        ),
   });
 };
 

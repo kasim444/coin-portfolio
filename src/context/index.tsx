@@ -21,8 +21,6 @@ const PortfoliosContext = createContext<{
 export const PortfoliosProvider = ({ children }: PropsWithChildren) => {
   const [state, dispatch] = useReducer(portfoliosReducer, initialState);
 
-  useEffect(() => console.log({ state }), [state]);
-
   return (
     <PortfoliosContext.Provider value={{ state, dispatch }}>
       {children}
