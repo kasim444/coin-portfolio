@@ -1,4 +1,4 @@
-import { PortfolioItem } from "@/components";
+import { NotFound, PortfolioItem } from "@/components";
 import usePortfolios from "@/context";
 import { PortfoliosActionType } from "@/context/actions";
 import { VStack } from "@chakra-ui/react";
@@ -10,6 +10,10 @@ export const PortfolioList: FC = () => {
     state: { portfolios },
     dispatch,
   } = usePortfolios();
+
+  if (!portfolios.length) {
+    return <NotFound />;
+  }
 
   return (
     <AnimatePresence>
