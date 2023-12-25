@@ -1,0 +1,14 @@
+[
+  {
+    "symbol": "ETHBTC",
+    "weightedAvgPrice": "0.05259781",
+    "lastPrice": "0.05231000",
+    "quantity": 1
+  },
+  {
+    "symbol": "BNTBTC",
+    "weightedAvgPrice": "0.00001755",
+    "lastPrice": "0.00001780",
+    "quantity": 2
+  }
+]
