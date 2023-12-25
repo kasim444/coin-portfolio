@@ -4,7 +4,7 @@ import { useTicker } from "@/hooks";
 import { Button, HStack } from "@chakra-ui/react";
 
 export const ActionButtonGroups = () => {
-  const { refetch } = useTicker();
+  const { refetch, isRefetching } = useTicker();
   const {
     state: { portfolios },
     dispatch,
@@ -23,7 +23,11 @@ export const ActionButtonGroups = () => {
       >
         {portfolios?.length ? "Add / Update" : "Add Stock"}
       </Button>
-      <Button colorScheme="blue" onClick={() => refetch()}>
+      <Button
+        colorScheme="blue"
+        onClick={() => refetch()}
+        isLoading={isRefetching}
+      >
         Refresh
       </Button>
     </HStack>

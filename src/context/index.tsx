@@ -4,6 +4,7 @@ import {
   createContext,
   useContext,
   useEffect,
+  useMemo,
   useReducer,
 } from "react";
 import { PortfoliosActions } from "./actions";
@@ -13,16 +14,27 @@ import { IPortfolioState, initialState } from "./state";
 const PortfoliosContext = createContext<{
   state: IPortfolioState;
   dispatch: Dispatch<PortfoliosActions>;
+  chartData: (string | number)[][];
 }>({
   state: initialState,
   dispatch: () => null,
+  chartData: [],
 });
 
 export const PortfoliosProvider = ({ children }: PropsWithChildren) => {
   const [state, dispatch] = useReducer(portfoliosReducer, initialState);
 
+  const chartData = useMemo(() => {
+    const data = state?.portfolios?.map((portfolio) => [
+      portfolio.symbol,
+      portfolio.quantity,
+    ]);
+
+    return [["Symbol", "Quantity"], ...data];
+  }, [state?.portfolios]);
+
   return (
-    <PortfoliosContext.Provider value={{ state, dispatch }}>
+    <PortfoliosContext.Provider value={{ state, dispatch, chartData }}>
       {children}
     </PortfoliosContext.Provider>
   );
